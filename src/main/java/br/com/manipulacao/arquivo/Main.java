@@ -1,5 +1,7 @@
 package br.com.manipulacao.arquivo;
 
+import br.com.manipulacao.arquivo.service.OperationsFileService;
+
 import java.util.Scanner;
 
 public class Main {
@@ -18,10 +20,11 @@ public class Main {
     }
     public static void menu_options_choice(Scanner in ) {
         String option = in.nextLine();
-
+        OperationsFileService operationsFileService = new OperationsFileService(in);
         while (!"3".equals(option)) {
             switch (option) {
                 case "1": // ler arquivo
+                    operationsFileService.readFile();
                     break;
                 case "2": // escrever no arquivo
                     break;
