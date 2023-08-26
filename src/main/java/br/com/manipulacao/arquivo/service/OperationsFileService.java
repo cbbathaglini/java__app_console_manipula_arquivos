@@ -20,12 +20,11 @@ public class OperationsFileService {
             System.out.println("Informe o nome do arquivo: ");
             Scanner in = new Scanner(System.in);
             String filename = in.nextLine();
-            InputStream inputStream = OperationsFileService.class.getClassLoader().getResourceAsStream("utils/" + filename);
+            filename = "utils/" + filename;
 
-            if (inputStream == null) {
-                throw new FileNotFoundException("Arquivo não encontrado");
-            }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            FileReader fileReader = new FileReader(filename);
+
+            BufferedReader reader = new BufferedReader(fileReader);
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
@@ -33,6 +32,25 @@ public class OperationsFileService {
 
             reader.close();
 
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void writeFile(){
+        try{
+            System.out.println("Informe o nome do arquivo: ");
+            Scanner in = new Scanner(System.in);
+            String filename = in.nextLine();
+            filename = "utils/" + filename;
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filename,true));
+            System.out.println("Informe o conteúdo que será concatenado no arquivo: ");
+            String content = in.nextLine();
+
+            writer.write(content);
+            writer.close();
 
         }catch (IOException e){
             e.printStackTrace();
